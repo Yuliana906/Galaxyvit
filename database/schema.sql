@@ -1,0 +1,4 @@
+-- ============================================
+-- Space Shooter Ranking - Esquema de base de datos
+-- FASE 1: Estructura inicial
+-- ============================================

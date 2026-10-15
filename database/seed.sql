@@ -1,0 +1,4 @@
+-- ============================================
+-- Space Shooter Ranking - Datos de prueba
+-- FASE 1: Estructura inicial
+-- ============================================
