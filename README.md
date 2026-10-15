@@ -18,17 +18,26 @@
 
 ## 3) Agentes y Skills
 
-**TODO:** Definir los agentes y skills específicos para este proyecto en `.opencode/` (agentes.json, skills.json). 
+El proyecto utiliza **agentes personalizados de OpenCode** en formato oficial: archivos `.md` con frontmatter ubicados en `.opencode/agents/`.
 
-Se recomienda incluir agentes para:
-- Arquitectura y estructura del proyecto
-- Desarrollo frontend (Vite + Phaser 3)
-- Desarrollo backend (Express + JWT + Supabase)
-- Base de datos (SQL + Supabase)
-- Documentación y revisión de código
-- Pruebas y validación
+### Agentes disponibles
 
-**TODO:** Documentar el uso de cada agente y skill con ejemplos de invocación.
+| Agente | Propósito | Alcance | Cuándo usarlo |
+|---|---|---|---|
+| **`architect`** | Arquitecto de software senior. Diseña estructura, modelo de datos y revisa decisiones técnicas. | `/docs/`, `database/schema.sql`, `database/views.sql`, `README.md`, `AGENTS.md`, `opencode.json` | Antes de implementar funcionalidades. Para diseñar ER, contratos API, arquitectura. **NO escribe código de producción.** |
+| **`game-dev`** | Desarrollador frontend especializado en Phaser 3, Vite, HTML, CSS, JS. | **ÚNICAMENTE** `/game/` | Para desarrollar escenas, entidades, páginas, estilos y lógica del juego. Integración con API backend. |
+| **`backend-dev`** | Desarrollador backend especializado en Node.js, Express, JWT, bcrypt, Supabase. | **ÚNICAMENTE** `/backend/` y `/database/` | Para crear API REST, endpoints auth/ranking, middlewares, configuración Supabase y scripts SQL (`schema.sql`, `seed.sql`, `views.sql`). |
+| **`qa-tester`** | QA Tester que revisa código, escribe pruebas y reporta bugs. | Lectura completa. Escritura solo en `/docs/` y archivos de test. **NO modifica código de producción.** | Para revisiones de calidad, detección de bugs, validación de convenciones, reportes antes de merge a `develop`. | 
+
+### Skills
+
+**TODO:** Definir skills específicos en `.opencode/skills/<nombre>/SKILL.md` según necesidades del proyecto. Cada skill debe incluir frontmatter con `name` y `description`.
+
+### Notas
+
+- Los agentes siguen el formato oficial de OpenCode v2 (archivos `.md` con frontmatter YAML).
+- Cada agente tiene permisos y límites de carpetas claramente definidos.
+- Todos los agentes respetan las reglas de `AGENTS.md` (Windows, español, sin claves reales).
 
 ## 4) Instalación
 

@@ -9,6 +9,7 @@
 - Código **simple, claro y comentado**.
 - Mantener la coherencia con la estructura, nomenclatura, estilo y patrones del código existente.
 - Tratar archivos o cambios desconocidos como trabajo del usuario e investigar antes de eliminar o sobrescribir.
+- El equipo trabaja en **Windows**. Usa comandos compatibles con PowerShell o CMD, nunca sintaxis bash (sin `2>$null`). Para crear archivos usa la herramienta de escritura, no comandos de shell.
 
 ## Convenciones de Código
 
@@ -53,7 +54,9 @@
 
 ```
 space-shooter-ranking/
-├── .opencode/           # Agentes y skills de OpenCode
+├── .opencode/           # Agentes y skills de OpenCode (formato oficial)
+│   ├── agents/          # Agentes personalizados (.md con frontmatter)
+│   └── skills/          # Skills personalizados (SKILL.md por directorio)
 ├── backend/             # API REST (Node.js + Express)
 │   └── src/
 │       ├── config/      # Configuraciones
