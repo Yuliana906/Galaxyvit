@@ -56,19 +56,14 @@ Pasos previstos:
 
 ## 5) Modelo ER / Diccionario de datos
 
-**TODO:** Diseñar y documentar el modelo entidad-relación (ER) completo.
+El modelo entidad-relación completo, con el diagrama y el diccionario de datos,
+está en este documento.
 
-**Entidades previstas (provisional):**
-- `usuarios` - Usuarios registrados con autenticación JWT
-- `partidas` - Registro de partidas jugadas
-- `puntuaciones` - Puntuaciones obtenidas por partida/usuario
+![Diagrama ER](docs/diagrama-er.png)
 
-**Diccionario de datos (provisional):**
-- **TODO:** Definir campos, tipos de datos, restricciones (PK, FK, UNIQUE, NOT NULL), índices y relaciones.
-- **TODO:** Especificar campos para ranking (usuario, puntuación máxima, total partidas, fecha última partida).
-- **TODO:** Incluir diagrama ER (texto o imagen) en `/docs/`.
+Entidades: `usuarios`, `naves`, `enemigos`, `partidas` y `eventos_partida`.
 
-**Ubicación:** Los scripts SQL correspondientes se encuentran en `/database/schema.sql`, `/database/seed.sql` y `/database/views.sql`.
+Los scripts SQL están en `/database/schema.sql`, `/database/seed.sql` y `/database/views.sql`.
 
 ## 6) Enlace al dashboard
 
