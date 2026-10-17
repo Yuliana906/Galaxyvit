@@ -9,7 +9,6 @@ pnpm-debug.log*
 .env
 .env.local
 .env.production
-.env.example
 
 # Build outputs
 dist
