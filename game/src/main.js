@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import { PreloadScene } from './scenes/PreloadScene.js';
-import { MenuScene } from './scenes/MenuScene.js';
-import { JuegoScene } from './scenes/JuegoScene.js';
-import { GameOverScene } from './scenes/GameOverScene.js';
+import BootScene from './scenes/BootScene.js';
+import MenuScene from './scenes/MenuScene.js';
+import MainScene from './scenes/MainScene.js';
+import GameOverScene from './scenes/GameOverScene.js';
 
 // Configuración del juego Phaser 3
 const config = {
@@ -18,7 +18,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, MenuScene, JuegoScene, GameOverScene],
+  scene: [BootScene, MenuScene, MainScene, GameOverScene],
 };
 
 // Inicializar la instancia del juego

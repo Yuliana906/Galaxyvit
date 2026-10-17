@@ -1,75 +1,70 @@
 import Phaser from 'phaser';
-import { estadoJuego } from '../services/EstadoJuego.js';
 
-/**
- * Escena de fin de partida (Game Over).
- * Muestra la puntuación obtenida, las vidas restantes y opciones para reiniciar o volver al menú.
- */
-export class GameOverScene extends Phaser.Scene {
+// Escena de Game Over: muestra puntuación y opciones de reinicio o ranking.
+
+export default class GameOverScene extends Phaser.Scene {
   constructor() {
     super('GameOverScene');
+  }
+
+  init(datos) {
+    this.puntuacionFinal = datos?.puntuacion || 0;
   }
 
   create() {
     const { width, height } = this.scale;
 
-    // Fondo oscuro
-    this.add.rectangle(0, 0, width, height, 0x000000, 0.85).setOrigin(0);
+    this.add
+      .text(width / 2, 150, 'GAME OVER', {
+        fontSize: '48px',
+        color: '#ff4fd8',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5);
 
-    // Título Game Over
-    this.add.text(width / 2, height / 3 - 20, 'GAME OVER', {
-      fontSize: '48px',
-      color: '#ff0000',
-      fontStyle: 'bold',
-    }).setOrigin(0.5);
+    this.add
+      .text(width / 2, 230, `Puntuación final: ${this.puntuacionFinal}`, {
+        fontSize: '24px',
+        color: '#7df9ff',
+      })
+      .setOrigin(0.5);
 
-    // Puntuación obtenida en la partida
-    this.add.text(width / 2, height / 2 - 40, `Puntuación: ${estadoJuego.getPuntuacion()}`, {
-      fontSize: '32px',
-      color: '#ffffff',
-    }).setOrigin(0.5);
+    const botonReiniciar = this.add
+      .text(width / 2, 330, 'REINTENTAR', {
+        fontSize: '24px',
+        color: '#0a0f22',
+        backgroundColor: '#7df9ff',
+        padding: { x: 16, y: 8 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
 
-    // Vidas restantes (siempre 0 si llegó por daño, pero se muestra por claridad)
-    this.add.text(width / 2, height / 2, `Vidas restantes: ${estadoJuego.getVidas()}`, {
-      fontSize: '24px',
-      color: '#ffaaaa',
-    }).setOrigin(0.5);
+    botonReiniciar.on('pointerover', () => botonReiniciar.setStyle({ backgroundColor: '#ff4fd8' }));
+    botonReiniciar.on('pointerout', () => botonReiniciar.setStyle({ backgroundColor: '#7df9ff' }));
+    botonReiniciar.on('pointerdown', () => this.scene.start('MainScene'));
 
-    // Botón para volver al menú
-    const btnMenu = this.add.text(width / 2, height / 2 + 70, 'VOLVER AL MENÚ', {
-      fontSize: '28px',
-      color: '#ffffff',
-      backgroundColor: '#004400',
-      padding: { x: 20, y: 10 },
-    }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+    const botonRanking = this.add
+      .text(width / 2, 410, 'ENVIAR / VER RANKING', {
+        fontSize: '20px',
+        color: '#7df9ff',
+        backgroundColor: 'rgba(16,24,58,0.6)',
+        padding: { x: 14, y: 8 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
 
-    btnMenu.on('pointerdown', () => {
-      estadoJuego.volverMenu();
-      this.scene.start('MenuScene');
+    botonRanking.on('pointerdown', () => {
+      window.location.href = 'ranking.html';
     });
 
-    btnMenu.on('pointerover', () => btnMenu.setColor('#ffff00'));
-    btnMenu.on('pointerout', () => btnMenu.setColor('#ffffff'));
+    const botonMenu = this.add
+      .text(width / 2, 490, 'MENÚ', {
+        fontSize: '18px',
+        color: '#a8b3e8',
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
 
-    // Botón para reiniciar partida
-    const btnReiniciar = this.add.text(width / 2, height / 2 + 130, 'REINICIAR PARTIDA', {
-      fontSize: '28px',
-      color: '#ffffff',
-      backgroundColor: '#440000',
-      padding: { x: 20, y: 10 },
-    }).setOrigin(0.5).setInteractive({ useHandCursor: true });
-
-    btnReiniciar.on('pointerdown', () => {
-      this.scene.start('JuegoScene');
-    });
-
-    btnReiniciar.on('pointerover', () => btnReiniciar.setColor('#ffff00'));
-    btnReiniciar.on('pointerout', () => btnReiniciar.setColor('#ffffff'));
-
-    // Nota de fase
-    this.add.text(width / 2, height - 40, 'Fase 3 - Mecánicas de combate (sin backend ni ranking)', {
-      fontSize: '14px',
-      color: '#666666',
-    }).setOrigin(0.5);
+    botonMenu.on('pointerdown', () => this.scene.start('MenuScene'));
   }
 }

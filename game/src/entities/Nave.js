@@ -8,8 +8,11 @@ export class Nave extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'nave');
 
-    scene.physics.add.existing(this);
-    this.setCollideWorldBounds(true);
+    // Asegurar que el cuerpo de física está habilitado (Phaser 3.60 no lo hace automáticamente
+    // en el constructor de Arcade.Sprite en todas las configuraciones)
+    this.scene.physics.add.existing(this);
+
+    this.body.setCollideWorldBounds(true);
     this.setDepth(1);
 
     // Velocidad de movimiento en píxeles por segundo

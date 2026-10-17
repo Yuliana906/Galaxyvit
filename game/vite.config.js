@@ -8,6 +8,9 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
+        index: resolve(__dirname, 'index.html'),
+        registro: resolve(__dirname, 'registro.html'),
+        ranking: resolve(__dirname, 'ranking.html'),
         juego: resolve(__dirname, 'juego.html'),
       },
     },

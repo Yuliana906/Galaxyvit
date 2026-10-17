@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - Space Shooter Ranking</title>
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body>
+    <main class="tarjeta-auth" role="main">
+      <h1>Crear cuenta</h1>
+      <p class="subtitulo">
+        Regístrate para competir por las mejores puntuaciones.
+      </p>
+
+      <form id="formulario-registro" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre de usuario</label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            placeholder="piloto_espacial"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="campo">
+          <label for="email">Correo electr&oacute;nico</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="tu@correo.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="campo">
+          <label for="password">Contrase&ntilde;a</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="boton">Registrarse</button>
+      </form>
+
+      <p id="mensaje-registro" class="mensaje-estado" role="status"></p>
+
+      <p class="enlace">
+        ¿Ya tienes cuenta?
+        <a href="index.html">Iniciar sesi&oacute;n</a>
+      </p>
+      <p class="enlace">
+        <a href="ranking.html">Ver ranking global</a>
+      </p>
+    </main>
+
+    <script type="module" src="./src/pages/registro.js"></script>
+  </body>
+</html>
