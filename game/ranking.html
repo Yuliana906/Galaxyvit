@@ -17,15 +17,15 @@
         <table class="tabla-ranking">
           <thead>
             <tr>
-              <th>Posición</th>
+              <th>Posici&oacute;n</th>
               <th>Jugador</th>
-              <th>Puntuación</th>
+              <th>Puntuaci&oacute;n</th>
               <th>Fecha</th>
             </tr>
           </thead>
           <tbody id="cuerpo-ranking">
             <tr>
-              <td colspan="4">Cargando ranking...</td>
+              <td colspan="4">Cargando ranking&hellip;</td>
             </tr>
           </tbody>
         </table>
@@ -33,16 +33,12 @@
 
       <div class="acciones-ranking">
         <a class="boton" href="juego.html">Jugar</a>
-        <a class="boton" href="index.html">Cerrar sesión</a>
+        <a class="boton" href="index.html">Iniciar sesi&oacute;n</a>
       </div>
       <p id="mensaje-ranking" class="mensaje-estado" role="status"></p>
     </main>
 
-    <!-- Guard de autenticación: redirige si no existe token. -->
-    <script type="module">
-      import { exigirAutenticacion } from './src/services/auth.js';
-      exigirAutenticacion();
-    </script>
+    <!-- Lógica de la página de ranking. Requiere backend en /ranking. -->
     <script type="module" src="./src/pages/ranking.js"></script>
   </body>
 </html>

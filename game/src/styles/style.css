@@ -1,0 +1,21 @@
+/* Estilos base para la página del juego */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000011;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#game-container {
+  width: 800px;
+  height: 600px;
+  max-width: 100vw;
+  max-height: 100vh;
+}
