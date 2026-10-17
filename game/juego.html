@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego - Space Shooter Ranking</title>
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body class="juego">
+    <main class="juego-contenedor">
+      <h1>Space Shooter</h1>
+      <p class="subtitulo">
+        Destruye enemigos, evita colisiones y escala en el ranking.
+      </p>
+      <div id="contenedor-juego"></div>
+      <p class="enlace">
+        <a href="ranking.html">Ver ranking</a>
+      </p>
+    </main>
+
+    <!-- Guardia de autenticación: redirige al login si no hay token. -->
+    <script type="module">
+      import { exigirAutenticacion } from './src/services/auth.js';
+      //exigirAutenticacion();
+    </script>
+
+    <!-- Punto de entrada del juego (Phaser 3). -->
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

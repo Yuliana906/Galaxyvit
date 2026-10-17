@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranking - Space Shooter Ranking</title>
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body>
+    <main class="tarjeta-ranking" role="main">
+      <h1>Ranking Global</h1>
+      <p class="subtitulo" id="subtitulo-ranking">
+        Las mejores puntuaciones de los pilotos.
+      </p>
+
+      <div class="tabla-contenedor">
+        <table class="tabla-ranking">
+          <thead>
+            <tr>
+              <th>Posición</th>
+              <th>Jugador</th>
+              <th>Puntuación</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-ranking">
+            <tr>
+              <td colspan="4">Cargando ranking...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="acciones-ranking">
+        <a class="boton" href="juego.html">Jugar</a>
+        <a class="boton" href="index.html">Cerrar sesión</a>
+      </div>
+      <p id="mensaje-ranking" class="mensaje-estado" role="status"></p>
+    </main>
+
+    <!-- Guard de autenticación: redirige si no existe token. -->
+    <script type="module">
+      import { exigirAutenticacion } from './src/services/auth.js';
+      exigirAutenticacion();
+    </script>
+    <script type="module" src="./src/pages/ranking.js"></script>
+  </body>
+</html>
