@@ -1,0 +1,276 @@
+/* Estilos base: Tema espacial oscuro, acentos neón y diseño responsive. */
+
+:root {
+  --color-fondo: #0b1024;
+  --color-panel: rgba(16, 24, 58, 0.72);
+  --color-texto: #e8ecff;
+  --color-texto-suave: #a8b3e8;
+  --color-primario: #7df9ff;
+  --color-acento: #ff4fd8;
+  --color-borde: rgba(125, 249, 255, 0.28);
+  --radio-borde: 14px;
+  --sombra: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --fuente-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--fuente-base);
+  color: var(--color-texto);
+  background:
+    radial-gradient(ellipse at top, rgba(125, 249, 255, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at bottom, rgba(255, 79, 216, 0.14) 0%, transparent 50%),
+    linear-gradient(180deg, #050615 0%, #0b1024 60%, #111a3a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-attachment: fixed;
+}
+
+.tarjeta-auth {
+  width: min(440px, 100%);
+  background: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra);
+  padding: 32px 28px;
+  backdrop-filter: blur(14px);
+}
+
+.tarjeta-auth h1 {
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+  background: linear-gradient(120deg, var(--color-primario), var(--color-acento));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.tarjeta-auth .subtitulo {
+  text-align: center;
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+  font-weight: 500;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--color-borde);
+  background: rgba(8, 14, 40, 0.7);
+  color: var(--color-texto);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(125, 249, 255, 0.18);
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #0a0f22;
+  background: linear-gradient(120deg, var(--color-primario), var(--color-acento));
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.boton:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.boton:active {
+  transform: translateY(0);
+}
+
+.enlace {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.enlace a {
+  color: var(--color-primario);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.enlace a:hover,
+.enlace a:focus {
+  text-decoration: underline;
+  color: var(--color-acento);
+}
+
+.mensaje-estado {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  display: none;
+}
+
+.mensaje-estado.error {
+  color: #ff7a7a;
+}
+
+.mensaje-estado.exito {
+  color: #7df9ff;
+}
+
+.juego-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+#contenedor-juego {
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: rgba(8, 14, 40, 0.8);
+  border: 2px solid #7df9ff;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: 0 0 24px rgba(125, 249, 255, 0.35), 0 0 48px rgba(255, 79, 216, 0.25);
+  margin: 16px auto;
+}
+
+.tarjeta-ranking {
+  width: min(820px, 100%);
+  background: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra);
+  padding: 32px 24px;
+  backdrop-filter: blur(14px);
+}
+
+.tarjeta-ranking h1 {
+  font-size: 1.9rem;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(120deg, var(--color-primario), var(--color-acento));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla-ranking {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+.tabla-ranking th,
+.tabla-ranking td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(125, 249, 255, 0.16);
+}
+
+.tabla-ranking thead th {
+  color: var(--color-primario);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.8px;
+}
+
+.tabla-ranking tbody tr:hover {
+  background: rgba(125, 249, 255, 0.06);
+}
+
+.posicion {
+  color: var(--color-acento);
+  font-weight: 700;
+}
+
+.acciones-ranking {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+body.juego {
+  background: #050615 url('/fondo-pagina.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 16px;
+  }
+
+  .tarjeta-auth,
+  .tarjeta-ranking {
+    padding: 24px 18px;
+  }
+
+  .tarjeta-auth h1,
+  .tarjeta-ranking h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    padding: 10px 12px;
+  }
+}

@@ -1,9 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "version": "2.0",
-  "project": {
-    "name": "space-shooter-ranking",
-    "description": "Videojuego web 2D con ranking global y autenticación JWT"
-  },
-  "mcp": {}
+  "mcp": {
+    "servers": {
+      "supabase": {
+        "type": "remote",
+        "url": "https://mcp.supabase.com/mcp?project_ref=vzsmbschefzibqiqbeko&read_only=true"
+      }
+    }
+  }
 }
