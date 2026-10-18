@@ -4,7 +4,7 @@
 import { obtenerToken, eliminarToken } from './auth.js';
 
 // URL base del backend. Se puede configurar mediante la variable VITE_API_URL.
-const URL_BASE_API = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(
+const URL_BASE_API = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(
   /\/$/,
   ''
 );
