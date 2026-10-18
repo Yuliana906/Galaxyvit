@@ -31,11 +31,59 @@ El proyecto utiliza **agentes personalizados de OpenCode** en formato oficial: a
 
 ### Skills
 
-**TODO:** Definir skills específicos en `.opencode/skills/<nombre>/SKILL.md` según necesidades del proyecto. Cada skill debe incluir frontmatter con `name` y `description`.
+Los skills son instrucciones reutilizables en formato oficial de OpenCode:
+`.opencode/skills/<id>/SKILL.md` con frontmatter (`name` y `description`). El
+agente los carga cuando la tarea coincide con su descripción.
+
+| Skill | ID | Qué aporta | Cuándo se usa |
+|---|---|---|---|
+| **Phaser 3 con JavaScript** | `phaser3-js` | Ciclo de vida de escenas, físicas, entrada, generación de enemigos, puntaje e integración con la API. | Al implementar o modificar el juego en `/game`. |
+| **Express y API REST con JWT** | `express-rest-jwt` | Estructura de rutas/controladores, firma y verificación de JWT, bcrypt, validación y manejo de errores según `docs/contrato-api.md`. | Al crear o modificar endpoints y middlewares en `/backend`. |
+| **Supabase y PostgreSQL** | `supabase-postgres` | Cliente de Supabase, convenciones SQL, vistas de ranking, seguridad y uso del MCP. | Al trabajar con el esquema, consultas y datos en `/database` y `/backend`. |
+| **GitFlow** | `gitflow` | Estrategia de ramas, convención de commits y flujo de Pull Requests. | Al crear ramas, commitear, abrir PR o preparar un release. |
+
+### MCP de Supabase
+
+El proyecto configura el **MCP de Supabase** en `opencode.json` (formato V2, bajo
+`mcp.servers`). Permite al agente consultar el esquema, lanzar SQL y gestionar
+migraciones durante el desarrollo.
+
+- **Justificación:** centraliza el trabajo con la base de datos (explorar tablas,
+  aplicar `schema.sql`/`views.sql`, depurar consultas) sin salir del editor y sin
+  copiar credenciales en la conversación.
+- **Seguridad:** no se escriben claves en el repositorio. La autenticación usa
+  **OAuth**, por lo que no hay tokens ni secretos en la configuración.
+- **Requisito para cada integrante:** ser **miembro del proyecto de Supabase**
+  (que un administrador te invite a la organización y al proyecto). Una vez
+  confirmado el acceso, cada integrante debe autenticar el MCP ejecutando:
+
+  ```text
+  opencode mcp auth supabase
+  ```
+
+  El comando abre el navegador para iniciar sesión y autorizar el acceso. Las
+  credenciales se guardan fuera del repositorio (no se versionan).
+- **Alcance:** la URL acota el MCP a un único proyecto y en modo solo lectura
+  (`read_only=true`). El `project_ref` de la URL del MCP es el del proyecto de
+  Supabase del equipo (el mismo que aparece en la URL de Supabase del equipo).
+
+```jsonc
+// Fragmento de opencode.json
+{
+  "mcp": {
+    "servers": {
+      "supabase": {
+        "type": "remote",
+        "url": "https://mcp.supabase.com/mcp?project_ref=vzsmbschefzibqiqbeko&read_only=true"
+      }
+    }
+  }
+}
+```
 
 ### Notas
 
-- Los agentes siguen el formato oficial de OpenCode v2 (archivos `.md` con frontmatter YAML).
+- Los agentes y skills siguen el formato oficial de OpenCode V2.
 - Cada agente tiene permisos y límites de carpetas claramente definidos.
 - Todos los agentes respetan las reglas de `AGENTS.md` (Windows, español, sin claves reales).
 
@@ -56,19 +104,14 @@ Pasos previstos:
 
 ## 5) Modelo ER / Diccionario de datos
 
-**TODO:** Diseñar y documentar el modelo entidad-relación (ER) completo.
+El modelo entidad-relación completo, con el diagrama y el diccionario de datos,
+está en este documento.
 
-**Entidades previstas (provisional):**
-- `usuarios` - Usuarios registrados con autenticación JWT
-- `partidas` - Registro de partidas jugadas
-- `puntuaciones` - Puntuaciones obtenidas por partida/usuario
+![Diagrama ER](docs/diagrama-er.png)
 
-**Diccionario de datos (provisional):**
-- **TODO:** Definir campos, tipos de datos, restricciones (PK, FK, UNIQUE, NOT NULL), índices y relaciones.
-- **TODO:** Especificar campos para ranking (usuario, puntuación máxima, total partidas, fecha última partida).
-- **TODO:** Incluir diagrama ER (texto o imagen) en `/docs/`.
+Entidades: `usuarios`, `naves`, `enemigos`, `partidas` y `eventos_partida`.
 
-**Ubicación:** Los scripts SQL correspondientes se encuentran en `/database/schema.sql`, `/database/seed.sql` y `/database/views.sql`.
+Los scripts SQL están en `/database/schema.sql`, `/database/seed.sql` y `/database/views.sql`.
 
 ## 6) Enlace al dashboard
 

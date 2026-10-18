@@ -1,0 +1,162 @@
+# ============================================================
+# Pruebas manuales de la API - Space Shooter Ranking
+# Extensión recomendada: REST Client (VSCode) - humao.rest-client
+#
+# Uso:
+#   1. Ejecuta el backend:  cd backend && npm run dev
+#   2. Pega un token JWT válido en la variable `token` de abajo
+#      (cópialo de la respuesta de "Login").
+#   3. Haz clic en "Send Request" sobre cada petición (###).
+#
+# Cada petición es independiente y puede ejecutarse por separado.
+# ============================================================
+
+@base = http://localhost:3000/api
+# Reemplaza este valor por el token devuelto por /auth/login
+@token = PEGA_AQUI_TU_TOKEN_JWT
+
+
+# ------------------------------------------------------------
+# Autenticación (auxiliar: sirve para obtener el token)
+# ------------------------------------------------------------
+
+### Registro de usuario (201 Created)
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Jugador Prueba",
+  "email": "jugador.prueba@example.com",
+  "password": "secreto123"
+}
+
+### Login (200 OK) - copia el campo `token` de la respuesta en @token
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "jugador.prueba@example.com",
+  "password": "secreto123"
+}
+
+
+# ------------------------------------------------------------
+# Naves (público)
+# ------------------------------------------------------------
+
+### GET /api/naves -> 200 OK (lista de naves)
+GET {{base}}/naves
+
+
+# ------------------------------------------------------------
+# Ranking (público)
+# ------------------------------------------------------------
+
+### GET /api/ranking -> 200 OK (top 10 por puntaje)
+GET {{base}}/ranking
+
+
+# ------------------------------------------------------------
+# Partidas (protegido con JWT)
+# ------------------------------------------------------------
+
+### POST /api/partidas -> 201 Created { "id": <id> }
+# Registra una partida finalizada con sus eventos.
+POST {{base}}/partidas
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nave_id": 1,
+  "puntaje": 3500,
+  "duracion_seg": 120,
+  "disparos": 85,
+  "aciertos": 42,
+  "eventos": [
+    {
+      "tipo_evento": "enemigo_destruido",
+      "enemigo_id": 1,
+      "momento_seg": 15
+    },
+    {
+      "tipo_evento": "impacto_meteorito",
+      "enemigo_id": null,
+      "momento_seg": 30
+    },
+    {
+      "tipo_evento": "impacto_bala",
+      "enemigo_id": null,
+      "momento_seg": 60
+    },
+    {
+      "tipo_evento": "muerte",
+      "enemigo_id": null,
+      "momento_seg": 120
+    }
+  ]
+}
+
+### GET /api/partidas/mias -> 200 OK (historial del usuario autenticado)
+GET {{base}}/partidas/mias
+Authorization: Bearer {{token}}
+
+
+# ------------------------------------------------------------
+# Casos de error
+# ------------------------------------------------------------
+
+### 401 Unauthorized - sin token
+# (envía la petición sin el header Authorization)
+GET {{base}}/partidas/mias
+# Sin header Authorization -> { "error": "Token ausente o inválido" }
+
+### 401 Unauthorized - token inválido
+GET {{base}}/partidas/mias
+Authorization: Bearer token.invalido.xxx
+
+### 401 Unauthorized - token inválido en POST
+POST {{base}}/partidas
+Content-Type: application/json
+Authorization: Bearer token.invalido.xxx
+
+{
+  "nave_id": 1,
+  "puntaje": 3500,
+  "duracion_seg": 120,
+  "disparos": 85,
+  "aciertos": 42,
+  "eventos": []
+}
+
+### 400 Bad Request - body malformado (falta `eventos`, campos no enteros)
+POST {{base}}/partidas
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nave_id": "uno",
+  "puntaje": "mucho",
+  "duracion_seg": 120,
+  "disparos": 85,
+  "aciertos": 42
+}
+
+### 400 Bad Request - `tipo_evento` no permitido
+POST {{base}}/partidas
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nave_id": 1,
+  "puntaje": 1000,
+  "duracion_seg": 30,
+  "disparos": 10,
+  "aciertos": 5,
+  "eventos": [
+    {
+      "tipo_evento": "explosion",
+      "enemigo_id": null,
+      "momento_seg": 5
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "space-shooter-ranking-backend",
+  "version": "1.0.0",
+  "description": "API REST (Express + Supabase) para Space Shooter Ranking",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
